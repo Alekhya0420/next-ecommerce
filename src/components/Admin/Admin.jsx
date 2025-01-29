@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, {useState,useEffect} from 'react';
 import Slidebar from '../../../reusables/Sidebar/Sidebar';
 import Header from '../../../reusables/Header/Header';
 import { Grid, Card, Typography, Button } from '@mui/material';
@@ -17,8 +17,33 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const Admin = () => {
   const [userCount, setuserCount] = useState(0);
 
-  const { productLength } = ProductQuantity();
-  const { orderLength } = Orderlength();
+  const {productLength} = ProductQuantity();
+  const {orderLength} = Orderlength();
+  const[totalSale,setTotalsale] = useState(0);
+  
+  useEffect(() => {
+    const fetchTotalPrice = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("orders")
+          .select("total_price"); 
+
+        if (error) throw error;
+
+        const total = data.reduce((sum, order) => sum + order.total_price, 0);
+        setTotalsale(total);
+
+      } catch (err) {
+        console.error("Error fetching total price:", err);
+      }
+    };
+
+    fetchTotalPrice();
+  }, []); 
+
+
+  console.log("total sale is",totalSale)
+
 
   const [productPriceData, setProductPriceData] = useState({
     '1-1200': 0,
@@ -70,11 +95,9 @@ const Admin = () => {
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh', marginTop: '50px', backgroundColor: '#F1F8FF', marginBottom: "20px" }}>
+    <div style={{display:'flex',height:'100vh',marginTop:'50px',backgroundColor:'#F1F8FF',marginBottom:"20px"}}>
       <Slidebar />
       <Header />
-
-      {/* Main Content */}
       <div
         style={{
           flexGrow: 1,
@@ -140,6 +163,15 @@ const Admin = () => {
             </Card>
           </Grid>
 
+
+          <Grid item xs={12} sm={4}>
+            <Card sx={{padding:2,boxShadow:3, backgroundColor: '#F0F8FF', border: '1px solid blue',
+            '&:hover':{backgroundColor:'#BA68C8'}}}>
+            <Typography variant="h6">Total sale {totalSale}</Typography>
+            </Card>
+          </Grid>
+
+
           {/* Pie charts in one row */}
           <Grid container item xs={12} spacing={4}>
             {/* Pie chart for Country data */}
@@ -174,3 +206,6 @@ const Admin = () => {
 };
 
 export default Admin;
+
+
+

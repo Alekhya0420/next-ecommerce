@@ -1,10 +1,10 @@
 import React from 'react'
-import UserDashboard from '../../components/Userpanel/UserDashboard/UserDashboard'
+import Stockalert  from '../../components/Stockalert/Stockalert'
 
 const page = () => {
   return (
     <div>
-    <UserDashboard/>
+    <Stockalert/>
     </div>
   )
 }

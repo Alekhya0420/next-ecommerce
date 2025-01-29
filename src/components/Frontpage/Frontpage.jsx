@@ -53,7 +53,7 @@ const Frontpage = () => {
             },
           }}
         >
-          <Link href="/admin" style={{ textDecoration: "none", color: "inherit" }}>
+          <Link href="/admin-auth" style={{ textDecoration: "none", color: "inherit" }}>
             👩‍💼 Are you Admin?
           </Link>
         </Button>

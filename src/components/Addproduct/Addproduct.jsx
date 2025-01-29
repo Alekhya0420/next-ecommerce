@@ -10,6 +10,7 @@ const Addproduct = () => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [category, setCategory] = useState('');  // New state for category
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ const Addproduct = () => {
         description,
         price: parseFloat(price),
         image_url: imageUrl,
+        category,  // Include category in the insert
       },
     ]);
 
@@ -33,6 +35,7 @@ const Addproduct = () => {
       setDescription('');
       setPrice('');
       setImageUrl('');
+      setCategory('');  // Reset category
     }
   };
 
@@ -160,6 +163,31 @@ const Addproduct = () => {
                 onChange={(e) => setImageUrl(e.target.value)}
                 required
                 placeholder="Enter product image URL"
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  borderRadius: '5px',
+                  border: '1px solid #007BFF',
+                  outline: 'none',
+                }}
+              />
+            </div>
+
+            {/* New Category Input */}
+            <div style={{ textAlign: 'left' }}>
+              <label
+                htmlFor="category"
+                style={{ marginBottom: '5px', display: 'block', fontWeight: 'bold', color: '#333' }}
+              >
+                Product Category:
+              </label>
+              <input
+                type="text"
+                id="category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+                placeholder="Enter product category"
                 style={{
                   width: '100%',
                   padding: '10px',

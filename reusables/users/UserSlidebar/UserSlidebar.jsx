@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 import { Userlogout } from "../../Userlogout/Userlogout";
 
 const UserSlidebar = () => {
-  const [user, setUser] = useState({ name: "", email: "" });
+  const [user, setUser] = useState({name:"",email:""});
 
   useEffect(() => {
     // Fetch user details from local storage

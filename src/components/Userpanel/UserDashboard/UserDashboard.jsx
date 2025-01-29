@@ -1,8 +1,8 @@
 "use client"
-import React, { useEffect, useState } from "react";
+import React, {useEffect,useState} from "react";
 import axios from "axios";
-import { product_api } from "../../../../api/api";
-import { Box, Card, CardContent, CardMedia, Typography, Grid, Button, TextField } from "@mui/material";
+import {product_api} from "../../../../api/api";
+import {Box,Card,CardContent,CardMedia,Typography,Grid,Button,TextField} from "@mui/material";
 import UserHeader from "../../../../reusables/users/UserHeader/UserHeader";
 import UserSlidebar from "../../../../reusables/users/UserSlidebar/UserSlidebar";
 import UserFooter from "../../../../reusables/users/UserFooter/UserFooter";
@@ -18,13 +18,17 @@ const UserDashboard = () => {
   const [user, setUser] = useState(null);  // Added state for user
   const api_key = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 
+  let userData = JSON.parse(localStorage.getItem('user')).name;
+  
   // Fetch user data after the component mounts (client-side only)
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined") 
+    {
       const userData = localStorage.getItem("user");
-      if (userData) {
-        setUser(JSON.parse(userData));
-      }
+    if (userData) 
+    {
+      setUser(JSON.parse(userData));
+    }
     }
   }, []);
 
@@ -97,8 +101,13 @@ const UserDashboard = () => {
     setSearchTerm(event.target.value.toLowerCase());
   };
 
+  // const filteredProducts = products.filter((product) =>
+  //   product.name.toLowerCase().includes(searchTerm)
+  // );
+
   const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm)
+    (product.name.toLowerCase().includes(searchTerm) || 
+     product.category.toLowerCase().includes(searchTerm))
   );
 
   const handleReviewSubmit = async (product, review) => {
@@ -110,6 +119,9 @@ const UserDashboard = () => {
           product_id: product.id,
           user_id: userId,
           review: review,
+          product_name:product.name,
+          review_image:product.image_url,
+          reviewer_name:userData
         });
 
         if (error) {
@@ -125,6 +137,41 @@ const UserDashboard = () => {
       console.log("No user logged in");
     }
   };
+  //adding item to wishlist
+  const handleAddToWishlist = async (product) => {
+    if (user) {
+      const { id: person_id } = user; 
+      const person_name = JSON.parse(localStorage.getItem("user")).name; 
+      const wishitem_id = product.id; 
+      const wishlist_image = product.image_url;
+      const quantity = 1; 
+      const total_price = product.price * quantity; // Calculate total price
+  
+      try {
+        // Insert data into the 'wishlist' table, including person_name
+        const { data, error } = await supabase.from("wishlist").insert({
+          person_id,
+          person_name,
+          wishitem_id,
+          quantity,
+          total_price,
+          wishlist_image
+        });
+  
+        if (error) {
+          console.error("Error adding to wishlist:", error);
+        } else {
+          alert("Product added to wishlist!");
+          console.log("Wishlist entry added:", data);
+        }
+      } catch (err) {
+        console.error("Error during Supabase wishlist insertion:", err);
+      }
+    } else {
+      console.log("No user logged in");
+    }
+  };
+  
 
   return (
     <div
@@ -142,7 +189,7 @@ const UserDashboard = () => {
           marginLeft: "260px",
           padding: "20px",
           marginBottom: "150px",
-          paddingBottom: "70px", // Ensure enough space for the footer
+          paddingBottom: "70px",
           flexGrow: 1,
         }}
       >
@@ -192,6 +239,9 @@ const UserDashboard = () => {
                   <Typography variant="body2" color="text.secondary" sx={{ marginTop: "8px" }}>
                     {product.description}
                   </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ marginTop: "8px" }}>
+                    <strong>{product.category}</strong>
+                  </Typography>
                   <Typography variant="body1" color="primary" sx={{ marginTop: "8px", fontWeight: "bold" }}>
                     ${product.price}
                   </Typography>
@@ -215,6 +265,11 @@ const UserDashboard = () => {
                       min: 1,
                     }}
                   />
+
+                  <Button onClick={() => handleAddToWishlist(product)}>
+                    Add to Wishlist
+                  </Button>
+
                   <Button
                     variant="contained"
                     sx={{
@@ -242,10 +297,13 @@ const UserDashboard = () => {
         product={selectedProduct}
         onReviewSubmit={handleReviewSubmit}
       />
-
       <UserFooter />
     </div>
   );
 };
 
 export default UserDashboard;
+
+
+
+

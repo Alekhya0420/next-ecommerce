@@ -67,6 +67,9 @@ const Sidebar = () => {
       <div style={{marginBottom:'20px',cursor:'pointer',fontSize:"20px",textDecoration:"underline",color:"blue"}}><Link href="/total-users">Users</Link></div>
       <div style={{marginBottom:'20px',cursor:'pointer',fontSize:"20px",textDecoration:"underline",color:"blue"}}><Link href="/productview">Product view</Link></div>
       <div style={{marginBottom:'20px',cursor:'pointer',fontSize:"20px",textDecoration:"underline",color:"blue"}}><Link href="/order-tracking">Order tracking</Link></div>
+      <div style={{marginBottom:'20px',cursor:'pointer',fontSize:"20px",textDecoration:"underline",color:"blue"}}><Link href="/review-pro">Review</Link></div>
+      <div style={{marginBottom:'20px',cursor:'pointer',fontSize:"20px",textDecoration:"underline",color:"blue"}}><Link href="/stock">Stock</Link></div>
+      <div style={{marginBottom:'20px',cursor:'pointer',fontSize:"20px",textDecoration:"underline",color:"blue"}}><Link href="/">Logout</Link></div>
     </div>
   );
 };

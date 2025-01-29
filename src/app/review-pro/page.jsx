@@ -1,10 +1,10 @@
 import React from 'react'
-import UserDashboard from '../../components/Userpanel/UserDashboard/UserDashboard'
+import Review from '../../components/Review/Review'
 
 const page = () => {
   return (
     <div>
-    <UserDashboard/>
+        <Review/>
     </div>
   )
 }

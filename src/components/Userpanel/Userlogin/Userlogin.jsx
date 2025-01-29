@@ -1,4 +1,4 @@
-//1)Rakesh123#
+
 "use client"
 import React, { useState } from 'react';
 import supabase from '../../../config/superbaseClient';
@@ -113,6 +113,15 @@ const Userlogin = () => {
                             Register Then
                         </Link>
                     </Typography>
+
+                    <Typography variant="body2">
+                        Go to admin
+                        <Link href="/admin" underline="hover">
+                            Go
+                        </Link>
+                    </Typography>
+
+
                 </form>
             </Box>
         </Box>

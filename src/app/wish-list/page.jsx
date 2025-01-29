@@ -1,10 +1,10 @@
 import React from 'react'
-import UserDashboard from '../../components/Userpanel/UserDashboard/UserDashboard'
+import Wishlist from '../../components/Wishlist/Wishlist'
 
 const page = () => {
   return (
     <div>
-    <UserDashboard/>
+    <Wishlist/>
     </div>
   )
 }

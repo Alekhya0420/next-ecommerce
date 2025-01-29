@@ -72,7 +72,7 @@ const ProductDetails = () => {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: "#f1f8e9" }}>
+    <div style={{ display:'flex',flexDirection:'column',minHeight: '100vh',backgroundColor:"#f1f8e9",marginBottom:"100px",marginTop:"100px"}}>
       <UserHeader />  
 
       <Container maxWidth="lg" sx={{ mt: 4, display: 'flex', justifyContent: 'center', flexDirection: 'column', flexGrow: 1 }}>
@@ -115,6 +115,7 @@ const ProductDetails = () => {
                         <Card sx={{ p: 2, backgroundColor: '#f5f5f5', boxShadow: 3, borderRadius: 2 }}>
                           <Typography variant="h6" color="blue">{review.user_id}</Typography>
                           <Typography variant="body1" color="brown">{review.review}</Typography>
+                          <Typography variant="body1" color="brown"><strong>Admin:</strong>{review.adminfed}</Typography>
                         </Card>
                       </Grid>
                     ))}
