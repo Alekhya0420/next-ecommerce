@@ -1,12 +1,27 @@
-import React from 'react'
-import UserDashboard from '../../components/Userpanel/UserDashboard/UserDashboard'
+// import React from 'react'
+// import UserDashboard from '../../components/Userpanel/UserDashboard/UserDashboard'
 
-const page = () => {
+// const page = () => {
+//   return (
+//     <div>
+//     <UserDashboard/>
+//     </div>
+//   )
+// }
+//export default page
+
+
+import React, {Suspense,lazy} from 'react';
+const UserDashboard = lazy(() => import('../../components/Userpanel/UserDashboard/UserDashboard'));
+
+const Page = () => {
   return (
     <div>
-    <UserDashboard/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <UserDashboard />
+      </Suspense>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Page;

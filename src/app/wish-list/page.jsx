@@ -1,12 +1,27 @@
-import React from 'react'
-import Wishlist from '../../components/Wishlist/Wishlist'
+// import React from 'react'
+// import Wishlist from '../../components/Wishlist/Wishlist'
 
-const page = () => {
+// const page = () => {
+//   return (
+//     <div>
+//     <Wishlist/>
+//     </div>
+//   )
+// }
+
+// export default page
+
+import React, {Suspense,lazy} from 'react';
+const Wishlist = lazy(() => import('../../components/Wishlist/Wishlist'));
+
+const Page = () => {
   return (
     <div>
-    <Wishlist/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Wishlist />
+      </Suspense>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Page;

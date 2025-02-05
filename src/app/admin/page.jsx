@@ -1,12 +1,28 @@
-import React from 'react'
-import Admin from '../../components/Admin/Admin'
+// import React from 'react'
+// import Admin from '../../components/Admin/Admin'
 
-const page = () => {
+// const page = () => {
+//   return (
+//     <div>
+//         <Admin/>
+//     </div>
+//   )
+// }
+
+// export default page
+
+import React, { lazy, Suspense } from 'react';
+
+const Admin = lazy(() => import('../../components/Admin/Admin'));
+
+const Page = () => {
   return (
     <div>
-        <Admin/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Admin />
+      </Suspense>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Page;

@@ -4,6 +4,7 @@ import Slidebar from '../../../reusables/Sidebar/Sidebar';
 import Header from '../../../reusables/Header/Header';
 import supabase from '../../config/superbaseClient'
 import Adminfooter from '../../../reusables/Adminfooter/Adminfooter';
+import Swal from "sweetalert2"; 
 
 const Addproduct = () => {
   const [name, setName] = useState('');
@@ -30,7 +31,11 @@ const Addproduct = () => {
       alert('There was an error adding the product.');
     } else {
       console.log('Product added successfully:', data);
-      alert('Product added successfully!');
+      Swal.fire({
+        icon: "success",
+        title: "Product added successfully!",
+        confirmButtonColor: "orange",
+      })
       setName('');
       setDescription('');
       setPrice('');

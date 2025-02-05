@@ -23,13 +23,16 @@ const UserFooter = () => {
         © 2025 Company Name. All Rights Reserved.
       </Typography>
 
-      <Box sx={{ display: "flex", gap: "50px" }}>
+      <Box sx={{display:"flex",gap:"50px"}}>
+        
         <p style={{color:"white",fontSize:"14px",cursor:"pointer"}}>
           Privacy Policy
         </p>
+
         <p style={{color:"white",fontSize:"14px",cursor:"pointer"}}>
           Terms & Conditions
         </p>
+
         <p style={{color:"white",fontSize:"14px",cursor:"pointer"}}>
           Help
         </p>

@@ -2,12 +2,13 @@
 import React, {useEffect,useState} from "react";
 import axios from "axios";
 import {product_api} from "../../../../api/api";
-import {Box,Card,CardContent,CardMedia,Typography,Grid,Button,TextField} from "@mui/material";
+import {Box,Card,CardContent,CardMedia,Typography,Grid,Button,TextField,Pagination} from "@mui/material";
 import UserHeader from "../../../../reusables/users/UserHeader/UserHeader";
 import UserSlidebar from "../../../../reusables/users/UserSlidebar/UserSlidebar";
 import UserFooter from "../../../../reusables/users/UserFooter/UserFooter";
 import supabase from "../../../config/superbaseClient";
 import ReviewModal from "../../../../reusables/review/ReviewModal";
+import Swal from "sweetalert2";
 
 const UserDashboard = () => {
   const [products, setProducts] = useState([]);
@@ -15,22 +16,45 @@ const UserDashboard = () => {
   const [open, setOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [user, setUser] = useState(null);  // Added state for user
+  const [user, setUser] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(4);
+
   const api_key = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 
-  let userData = JSON.parse(localStorage.getItem('user')).name;
-  
-  // Fetch user data after the component mounts (client-side only)
+  // let userData = JSON.parse(localStorage.getItem('user')).name;
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") 
+  //   {
+  //     const userData = localStorage.getItem("user");
+  //   if (userData) 
+  //   {
+  //     setUser(JSON.parse(userData));
+  //   }
+  //   }
+  // }, []);
+
   useEffect(() => {
-    if (typeof window !== "undefined") 
-    {
-      const userData = localStorage.getItem("user");
-    if (userData) 
-    {
-      setUser(JSON.parse(userData));
-    }
+    if (typeof window !== "undefined") {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        try {
+          const userObj = JSON.parse(storedUser);
+          if (userObj?.id) {
+            setUser(userObj);
+          } else {
+            console.error("User ID is missing in localStorage.");
+          }
+        } catch (err) {
+          console.error("Error parsing user data:", err);
+        }
+      }
     }
   }, []);
+  
+
+  
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -73,7 +97,11 @@ const UserDashboard = () => {
         if (error) {
           console.error("Error inserting order:", error);
         } else {
-          alert("Order added successfully");
+          Swal.fire({
+            icon: "success",
+            title: "Product order successfully!",
+            confirmButtonColor: "orange",
+          })
           console.log("Order added successfully:", data);
         }
       } catch (err) {
@@ -101,9 +129,7 @@ const UserDashboard = () => {
     setSearchTerm(event.target.value.toLowerCase());
   };
 
-  // const filteredProducts = products.filter((product) =>
-  //   product.name.toLowerCase().includes(searchTerm)
-  // );
+  
 
   const filteredProducts = products.filter((product) =>
     (product.name.toLowerCase().includes(searchTerm) || 
@@ -127,8 +153,12 @@ const UserDashboard = () => {
         if (error) {
           console.error("Error submitting review:", error);
         } else {
-          alert("Review submitted successfully");
-          console.log("Review submitted:", data);
+          Swal.fire({
+            icon: "success",
+            title: "review  added successfully!",
+            confirmButtonColor: "orange",
+          })
+         console.log("Review submitted:", data);
         }
       } catch (err) {
         console.error("Error during review submission:", err);
@@ -148,20 +178,16 @@ const UserDashboard = () => {
       const total_price = product.price * quantity; // Calculate total price
   
       try {
-        // Insert data into the 'wishlist' table, including person_name
-        const { data, error } = await supabase.from("wishlist").insert({
-          person_id,
-          person_name,
-          wishitem_id,
-          quantity,
-          total_price,
-          wishlist_image
-        });
+const {data,error}=await supabase.from("wishlist").insert({person_id,person_name,wishitem_id,quantity,total_price,wishlist_image});
   
         if (error) {
           console.error("Error adding to wishlist:", error);
         } else {
-          alert("Product added to wishlist!");
+          Swal.fire({
+            icon: "success",
+            title: "added wishlist!",
+            confirmButtonColor: "orange",
+          })
           console.log("Wishlist entry added:", data);
         }
       } catch (err) {
@@ -172,6 +198,16 @@ const UserDashboard = () => {
     }
   };
   
+  //pagination logic starts here
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+  
+  //pagination logic ends here
 
   return (
     <div
@@ -205,8 +241,9 @@ const UserDashboard = () => {
           sx={{ marginBottom: "20px", width: "300px" }}
         />
 
+
         <Grid container spacing={4}>
-          {filteredProducts.map((product) => (
+          {currentProducts.map((product) => (
             <Grid item xs={12} sm={6} md={4} key={product.id}>
               <Card
                 sx={{
@@ -288,8 +325,16 @@ const UserDashboard = () => {
             </Grid>
           ))}
         </Grid>
-      </Box>
+      <Pagination 
+      count={Math.ceil(filteredProducts.length / productsPerPage)} 
+      page={currentPage}
+      color="primary" 
+      onChange={handlePageChange} 
+      sx={{ display: "flex", justifyContent: "center", marginTop: "20px"}}
+      />
 
+      </Box>
+      
       {/* Review Modal */}
       <ReviewModal
         open={open}
@@ -297,6 +342,7 @@ const UserDashboard = () => {
         product={selectedProduct}
         onReviewSubmit={handleReviewSubmit}
       />
+      
       <UserFooter />
     </div>
   );
