@@ -8,7 +8,7 @@ import { Menu as MenuIcon, AccountCircle as AccountCircleIcon } from '@mui/icons
 
 const Header = () => {
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: '#2196F3' }}>
+    <AppBar position="fixed" sx={{backgroundColor:'orange'}}>
       <Toolbar>
         <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
           <MenuIcon />

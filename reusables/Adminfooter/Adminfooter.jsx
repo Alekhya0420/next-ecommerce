@@ -6,7 +6,7 @@ const Adminfooter = () => {
     <Box
       sx={{
         width: "100%",
-        backgroundColor: "#2196F3",
+        backgroundColor: "orange",
         padding: "20px",
         display: "flex",
         flexDirection: "column",

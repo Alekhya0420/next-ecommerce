@@ -138,7 +138,7 @@ const UserDashboard = () => {
 
   const handleReviewSubmit = async (product, review) => {
     if (user) {
-      const { id: userId } = user;
+      const { id: userId,name:userData } = user;
 
       try {
         const { data, error } = await supabase.from("reviews").insert({

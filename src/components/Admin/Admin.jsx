@@ -163,7 +163,6 @@
 
 
 
-
 "use client";
 import React, { useState, useEffect } from "react";
 import Slidebar from "../../../reusables/Sidebar/Sidebar";
@@ -182,11 +181,11 @@ ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarEle
 
 const Admin = () => {
   const [userCount, setUserCount] = useState(0);
-  const { productLength } = ProductQuantity();
-  const { orderLength } = Orderlength();
-  const [totalSale, setTotalSale] = useState(0);
-  const [orders, setOrders] = useState([]);
-  const [productPrices, setProductPrices] = useState([]);
+  const {productLength} = ProductQuantity();
+  const {orderLength} = Orderlength();
+  const [totalSale,setTotalSale] = useState(0);
+  const [orders,setOrders] = useState([]);
+  const [productPrices,setProductPrices]=useState([]);
 
   useEffect(() => {
     const fetchTotalPrice = async () => {
