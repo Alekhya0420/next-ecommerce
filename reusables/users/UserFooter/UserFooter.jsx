@@ -6,7 +6,7 @@ const UserFooter = () => {
     <Box
       sx={{
         width: "100%",
-        backgroundColor: "#e0e0e0",
+        backgroundColor: "black",
         padding: "20px",
         display: "flex",
         flexDirection: "column",
@@ -19,7 +19,7 @@ const UserFooter = () => {
         zIndex: 10, 
       }}
     >
-      <Typography sx={{ fontSize: "14px", color: "#333", marginBottom: "10px" }}>
+      <Typography sx={{ fontSize: "14px", color: "white", marginBottom: "10px" }}>
         © 2025 Company Name. All Rights Reserved.
       </Typography>
 

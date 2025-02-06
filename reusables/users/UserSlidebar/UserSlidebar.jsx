@@ -22,13 +22,13 @@ const UserSlidebar = () => {
     <Box
       sx={{
         width: "240px",
-        backgroundColor: "#e0e0e0", 
+        backgroundColor: "black", 
         paddingTop: "100px",
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
         paddingLeft: "20px",
-        color: "#333",
+        color: "white",
         height: "100vh",
         position: "fixed",
         top: 10,
@@ -42,7 +42,6 @@ const UserSlidebar = () => {
           fontSize: "18px",
           fontWeight: "bold",
           transition: "color 0.3s ease",
-          color: "#333",
           "&:hover": {
             color: "#e91e63", // Pink color on hover
           },
@@ -58,7 +57,6 @@ const UserSlidebar = () => {
           fontSize: "18px",
           fontWeight: "bold",
           transition: "color 0.3s ease",
-          color: "#333",
           "&:hover": {
             color: "#e91e63",
           },

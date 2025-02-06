@@ -164,7 +164,7 @@ const UserHeader = () => {
     <AppBar
       position="fixed"
       sx={{
-        backgroundColor: "#e0e0e0",
+        backgroundColor: "#6495ed",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
       }}
     >
@@ -173,7 +173,7 @@ const UserHeader = () => {
           <MenuIcon />
         </IconButton>
 
-        <Typography variant="h6" sx={{ fontWeight: "200", color: "#333", textDecoration: "underline", marginTop: "1px" }}>
+        <Typography variant="h6" sx={{ fontWeight: "200", color: "white", marginTop: "1px" }}>
           <Link href="/userDashboard">User-Dashboard</Link>
         </Typography>
 
@@ -183,9 +183,8 @@ const UserHeader = () => {
               variant="h6"
               sx={{
                 fontWeight: "200",
-                color: "#333",
+                color: "white",
                 marginTop: "6px",
-                textDecoration: "underline",
                 "&:hover": { color: "#e91e63" },
               }}
             >
@@ -193,13 +192,13 @@ const UserHeader = () => {
             </Typography>
           </Link>
 
-          <Typography variant="h6" sx={{ fontWeight: "200", marginTop: "6px", color: "#333", "&:hover": { color: "#e91e63" } }}>
+          <Typography variant="h6" sx={{ fontWeight: "200", marginTop: "6px", color: "white", "&:hover": { color: "#e91e63" } }}>
             Cart({cartNo})
           </Typography>
 
           <Link href="/wish-list">
             <IconButton color="inherit">
-              <h5 style={{ textDecoration: "underline", color: "#333", marginTop: "1px" }}>wishlist</h5>
+              <h5 style={{ color: "white", marginTop: "1px" }}>wishlist</h5>
               <FavoriteIcon sx={{ color: "#e91e63" }} />
             </IconButton>
           </Link>
