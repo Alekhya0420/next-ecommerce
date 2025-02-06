@@ -249,11 +249,11 @@ const Admin = () => {
         <Header />
         <Grid container spacing={4} sx={{ mt: 4 }}>
           {/* Stats Cards */}
-          {[{ title: "No. of Users", count: userCount, color: "#42A5F5" },
-            { title: "No. of Orders", count: orderLength, color: "#66BB6A" },
-            { title: "No. of Products", count: productLength, color: "#FFA726" }].map((stat, index) => (
+          {[{ title: "No. of Users", count: userCount, color: "white" },
+            { title: "No. of Orders", count: orderLength, color: "white" },
+            { title: "No. of Products", count: productLength, color: "white" }].map((stat, index) => (
             <Grid item xs={12} sm={4} key={index}>
-              <Card sx={{ padding: 3, backgroundColor: stat.color, color: "#fff", textAlign: "center", boxShadow: 5, borderRadius: 2 }}>
+              <Card sx={{ padding: 3, backgroundColor: stat.color, color: "black", textAlign: "center", boxShadow: 5, borderRadius: 2 }}>
                 <Typography variant="h6" sx={{ fontWeight: "bold", fontSize: "1.1rem" }}>{stat.title}</Typography>
                 <Typography variant="h3" sx={{ fontWeight: "bold" }}>{stat.count}</Typography>
               </Card>
@@ -261,7 +261,7 @@ const Admin = () => {
           ))}
 
           <Grid item xs={12} sm={4}>
-            <Card sx={{ padding: 3, backgroundColor: "#EF5350", color: "#fff", textAlign: "center", boxShadow: 5, borderRadius: 2 }}>
+            <Card sx={{ padding: 3, backgroundColor: "white", color: "black", textAlign: "center", boxShadow: 5, borderRadius: 2 }}>
               <Typography variant="h6" sx={{ fontWeight: "bold" }}>Total Sale</Typography>
               <Typography variant="h3" sx={{ fontWeight: "bold" }}>${totalSale}</Typography>
             </Card>
