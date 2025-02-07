@@ -69,7 +69,7 @@ const Sidebar = () => {
       <div style={{marginBottom:'20px',cursor:'pointer',fontSize:"20px",color:"white"}}><Link href="/order-tracking">Order tracking</Link></div>
       <div style={{marginBottom:'20px',cursor:'pointer',fontSize:"20px",color:"white"}}><Link href="/review-pro">Review</Link></div>
       <div style={{marginBottom:'20px',cursor:'pointer',fontSize:"20px",color:"white"}}><Link href="/stock">Stock</Link></div>
-      <div style={{marginBottom:'20px',cursor:'pointer',fontSize:"20px",color:"white"}}><Link href="/">Logout</Link></div>
+      {/* <div style={{marginBottom:'20px',cursor:'pointer',fontSize:"20px",color:"white"}}><Link href="/">Logout</Link></div>*/}
     </div>
   );
 };
